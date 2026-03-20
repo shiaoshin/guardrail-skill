@@ -4,28 +4,32 @@ A safety skill for AI-assisted developers that protects against the most common 
 
 Works with Claude Code, Cursor, Codex CLI, VS Code (Copilot), Gemini CLI, Windsurf, Goose, Amp, and 20+ other agents that support the [Agent Skills open standard](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
 
+---
+
 ## What It Does
 
-**Onboards** new vibe coders with the 6 non-negotiables before any code gets written — version control, secrets management, AI output review, scope control, secret scanning, and planning discipline.
+**Onboards** new vibe coders with 6 non-negotiables before any code gets written — version control, secrets management, AI output review, scope control, secret scanning, and planning discipline.
 
-**Intercepts** dangerous operations in real time with a clear `⚠️ GUARDRAIL` warning, the specific risk explained in plain language, and a safe alternative offered immediately.
+**Intercepts** dangerous operations in real time with a clear `⚠️ GUARDRAIL` warning, the specific risk in plain language, and a safe alternative offered immediately.
 
-**Expands** into domain-specific guidance as the project grows — loading the right reference file at the moment it's relevant rather than front-loading a 10,000-word manual.
+**Expands** into domain-specific guidance as the project grows — loading the right reference file at the moment it's relevant, not upfront.
+
+---
 
 ## Installation
 
 ### One command (recommended)
 ```bash
-npx skills add lukelinai/guardrail-skill
+npx skills add shiaoshin/guardrail-skill
 ```
-Installs to the universal `~/.agent/skills/` path, recognized by Claude Code, Cursor, Codex, Gemini CLI, and most other agents.
+Installs to `~/.agent/skills/`, the universal path recognized by Claude Code, Cursor, Codex, Gemini CLI, and most other agents.
 
 ### Claude.ai
 1. Download `guardrail.skill` from [Releases](../../releases)
 2. Go to **Settings → Capabilities → Skills**
 3. Upload the `.skill` file
 
-### Per-agent manual install
+### Manual install
 
 Clone or download this repo, then copy the `guardrail` folder to the right path for your tool:
 
@@ -39,23 +43,27 @@ Clone or download this repo, then copy the `guardrail` folder to the right path 
 | Windsurf | `~/.codeium/skills/` | `.agents/skills/` |
 | **Universal (any agent)** | `~/.agent/skills/` | `.agents/skills/` |
 
-> ⚠️ **Gemini CLI note:** The `references/` subdirectory progressive loading has a [known compatibility issue](https://github.com/google-gemini/gemini-cli/issues/15895) in Gemini CLI. Core `SKILL.md` functionality works; fix is pending upstream.
+> ⚠️ **Gemini CLI note:** Progressive loading of `references/` subdirectories has a [known compatibility issue](https://github.com/google-gemini/gemini-cli/issues/15895). Core `SKILL.md` functionality works; fix is pending upstream.
+
+---
 
 ## Skill Structure
 
 ```
 guardrail/
-├── SKILL.md                        # Core instructions + danger interception logic
+├── SKILL.md                    # Core instructions + danger interception logic
 └── references/
-    ├── git-basics.md               # Git workflow and commands for vibe coders
-    ├── web-app.md                  # OWASP Top 10, input validation, auth libraries
-    ├── database.md                 # Supabase RLS, migrations, destructive ops
-    ├── deployment.md               # Env vars, staging, CI/CD, billing alerts
-    ├── auth.md                     # Auth libraries, JWT, authorization vs authentication
-    └── secret-scanning.md         # Pre-commit hooks, gitleaks, GitHub scanning, custom scripts
+    ├── git-basics.md           # Git workflow and commands for vibe coders
+    ├── web-app.md              # OWASP Top 10, input validation, auth libraries
+    ├── database.md             # Supabase RLS, migrations, destructive ops
+    ├── deployment.md           # Env vars, staging, CI/CD, billing alerts
+    ├── auth.md                 # Auth libraries, JWT, authorization vs authentication
+    └── secret-scanning.md     # Pre-commit hooks, gitleaks, GitHub scanning, custom scripts
 ```
 
 Reference files load on demand — only when the user's project enters that domain.
+
+---
 
 ## Danger Interception Triggers
 
@@ -70,9 +78,13 @@ Reference files load on demand — only when the user's project enters that doma
 | Unrecognized npm/pip package | Slopsquatting / malware risk | Verify on npm/PyPI before install |
 | No secret scanning setup | Silent leaks undetected | Prompt to set up scanning |
 
+---
+
 ## Who It's For
 
 Designers, marketers, non-technical founders, and anyone using vibe coding tools (Cursor, Replit, Lovable, Bolt, v0, Claude Code) to build their first real project. Experienced developers won't need it — but their junior teammates will.
+
+---
 
 ## Background
 
@@ -82,21 +94,7 @@ Built in response to documented patterns in the vibe coding ecosystem:
 - 170 of 1,645 Lovable-generated apps had auth vulnerabilities exposing user data (2025)
 - API keys scraped from public GitHub repos within minutes of being pushed
 
-The skill follows the [Agent Skills open standard](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills) (released December 2025) and is compatible with Claude Code, Claude.ai, and any agent platform that supports the `SKILL.md` format.
-
-## Compatibility
-
-| Platform | Supported |
-|---|---|
-| Claude.ai (Pro/Max/Team/Enterprise) | ✅ |
-| Claude Code | ✅ |
-| Cursor | ✅ |
-| OpenAI Codex CLI | ✅ |
-| VS Code / GitHub Copilot | ✅ |
-| Windsurf | ✅ |
-| Goose | ✅ |
-| Amp | ✅ |
-| Gemini CLI / Antigravity | ⚠️ Partial (see install note) |
+---
 
 ## License
 
