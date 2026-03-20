@@ -1,6 +1,8 @@
-# Guardrail — AI/Vibe Coding Safety Skill for Claude
+# Guardrail — AI/Vibe Coding Safety Skill
 
-A Claude skill that protects first-time and early-stage AI-assisted developers from the most common and costly mistakes: leaked secrets, open databases, rogue AI agents, and deploying code that looks right but isn't.
+A safety skill for AI-assisted developers that protects against the most common and costly mistakes: leaked secrets, open databases, rogue AI agents, and deploying code that looks right but isn't.
+
+Works with Claude Code, Cursor, Codex CLI, VS Code (Copilot), Gemini CLI, Windsurf, Goose, Amp, and 20+ other agents that support the [Agent Skills open standard](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
 
 ## What It Does
 
@@ -12,19 +14,32 @@ A Claude skill that protects first-time and early-stage AI-assisted developers f
 
 ## Installation
 
+### One command (recommended)
+```bash
+npx skills add lukelinai/guardrail-skill
+```
+Installs to the universal `~/.agent/skills/` path, recognized by Claude Code, Cursor, Codex, Gemini CLI, and most other agents.
+
 ### Claude.ai
 1. Download `guardrail.skill` from [Releases](../../releases)
 2. Go to **Settings → Capabilities → Skills**
 3. Upload the `.skill` file
 
-### Claude Code
-```bash
-# Personal (available across all projects)
-cp -r guardrail ~/.claude/skills/
+### Per-agent manual install
 
-# Project-level (committed to repo, shared with team)
-cp -r guardrail .claude/skills/
-```
+Clone or download this repo, then copy the `guardrail` folder to the right path for your tool:
+
+| Agent | Personal (all projects) | Project-level (repo) |
+|---|---|---|
+| Claude Code | `~/.claude/skills/` | `.claude/skills/` |
+| Cursor | `~/.cursor/skills/` | `.cursor/skills/` |
+| Codex CLI | `~/.codex/skills/` | `.agents/skills/` |
+| Gemini CLI | `~/.gemini/skills/` | `.gemini/skills/` |
+| VS Code / Copilot | `~/.github/skills/` | `.github/skills/` |
+| Windsurf | `~/.codeium/skills/` | `.agents/skills/` |
+| **Universal (any agent)** | `~/.agent/skills/` | `.agents/skills/` |
+
+> ⚠️ **Gemini CLI note:** The `references/` subdirectory progressive loading has a [known compatibility issue](https://github.com/google-gemini/gemini-cli/issues/15895) in Gemini CLI. Core `SKILL.md` functionality works; fix is pending upstream.
 
 ## Skill Structure
 
@@ -75,8 +90,13 @@ The skill follows the [Agent Skills open standard](https://www.anthropic.com/eng
 |---|---|
 | Claude.ai (Pro/Max/Team/Enterprise) | ✅ |
 | Claude Code | ✅ |
-| Cursor (SKILL.md standard) | ✅ |
-| Codex CLI | ✅ |
+| Cursor | ✅ |
+| OpenAI Codex CLI | ✅ |
+| VS Code / GitHub Copilot | ✅ |
+| Windsurf | ✅ |
+| Goose | ✅ |
+| Amp | ✅ |
+| Gemini CLI / Antigravity | ⚠️ Partial (see install note) |
 
 ## License
 
